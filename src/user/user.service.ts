@@ -14,4 +14,19 @@ export class UserService {
     const users = await this.prisma.user.findMany();
     return users;
   }
+
+  async getUserById(id: string) {
+    const user = await this.prisma.user.findUnique({ where: { id } });
+    return user;
+  }
+
+  async updateUser(id: string, user: any) {
+    await this.prisma.user.update({ where: { id }, data: user });
+    return user;
+  }
+
+  async deleteUser(id: string) {
+    const user = await this.prisma.user.delete({ where: { id } });
+    return user;
+  }
 }
